@@ -25,32 +25,32 @@ class Minesweeper
   def display
     board.render
   end
-  #
-  # def over?
-  #   board[pos].bomb?
-  # end
 
   def make_move(pos)
-    return -1 if board[pos].bomb?
+    # return -1 if board[pos].bomb?
+    return if board[pos].bomb?
     board.fringe(pos)
   end
 
   def play
-    until board.empty_squares.length == 0
+    until board.all_squares_revealed?
       system('clear')
       display
       pos = get_move
-      return "You lost" if self.bomb?
+      return "You lost" if board[pos].bomb? == true
       make_move(pos)
     end
+    display
     "You won!"
+  end
+
+  def run
+    results = play
+    puts results
   end
 end
 
 if __FILE__ == $PROGRAM_NAME
   game = Minesweeper.new(Board.new(9))
-  game.display
-  move = game.get_move
-  game.make_move(move)
-  game.display
+  game.run
 end

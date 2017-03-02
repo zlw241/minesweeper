@@ -13,7 +13,7 @@ class Board
     grid.length
   end
 
-  def plant_mines(n = 80)
+  def plant_mines(n = 10)
     n.times do
       pos = empty_squares.shuffle.first
       self[pos] = Tile.new(nil, true)
@@ -115,10 +115,30 @@ class Board
   end
 
   def render
-    puts "  #{(0..(grid.length-1)).to_a.join(" ")}"
+    columns = "#{(0..(grid.length-1)).to_a.join(" ")}"
+    puts "  " + columns
+    puts "  " + ("-" * columns.length)
     grid.each_with_index do |row, i|
       show_row = row.map { |tile| tile.revealed? ? tile.count.to_s : " " }
-      puts "#{i} #{show_row.join(" ")}"
+      puts "#{i}|#{show_row.join(" ")}"
+    end
+  end
+
+  def all_squares_revealed?
+    revealed_count = 0
+    number_of_squares = 0
+    bomb_count = 0
+    grid.each do |row|
+      row.each do |item|
+        revealed_count += 1 if item.revealed?
+        bomb_count += 1 if item.bomb?
+        number_of_squares += 1
+      end
+    end
+    if number_of_squares - bomb_count == revealed_count
+      true
+    else
+      false
     end
   end
 
@@ -140,5 +160,4 @@ if __FILE__ == $PROGRAM_NAME
   board.plant_mines
   board.plant_tiles
   board.render
-  # p board.clicked_squares
 end
