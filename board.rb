@@ -56,7 +56,7 @@ class Board
   end
 
   def adjacent_squares(pos)
-    p left(pos) + right(pos) + top_bottom(pos)
+    left(pos) + right(pos) + top_bottom(pos)
   end
 
   def bomb_count(pos)
@@ -123,7 +123,8 @@ class Board
   def render
     puts "  #{(0..(grid.length-1)).to_a.join(" ")}"
     grid.each_with_index do |row, i|
-      puts "#{i} #{row.join(" ")}"
+      show_row = row.map { |tile| tile.revealed? ? tile.count.to_s : " " }
+      puts "#{i} #{show_row.join(" ")}"
     end
   end
 
