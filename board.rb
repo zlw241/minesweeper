@@ -9,6 +9,10 @@ class Board
     plant_tiles
   end
 
+  def length
+    grid.length
+  end
+
   def plant_mines(n=2)
     n.times do
       pos = empty_squares.shuffle.first

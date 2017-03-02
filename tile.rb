@@ -16,7 +16,7 @@ class Tile
   end
 
   def reveal
-    revealed = true
+    self.revealed = true
   end
 
   def bomb?
