@@ -5,6 +5,8 @@ class Board
 
   def initialize(dimensions)
     @grid = Array.new(dimensions) { Array.new(dimensions) }
+    plant_mines
+    plant_tiles
   end
 
   def plant_mines(n=2)
@@ -96,7 +98,6 @@ class Board
     all_pos
   end
 
-
   def empty_squares
     empty_squares = []
     grid.each_index do |idx1|
@@ -109,17 +110,6 @@ class Board
     empty_squares
   end
 
-  # def clicked_squares
-  #   clicked_squares = []
-  #   grid.each do |row|
-  #     row.each do |item|
-  #       clicked_squares << item if item.revealed?
-  #     end
-  #   end
-  #
-  #   clicked_squares
-  # end
-
   def render
     puts "  #{(0..(grid.length-1)).to_a.join(" ")}"
     grid.each_with_index do |row, i|
@@ -129,9 +119,6 @@ class Board
   end
 
 end
-
-
-
 
 if __FILE__ == $PROGRAM_NAME
   board = Board.new(3)
