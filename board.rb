@@ -13,7 +13,7 @@ class Board
     grid.length
   end
 
-  def plant_mines(n=2)
+  def plant_mines(n = 80)
     n.times do
       pos = empty_squares.shuffle.first
       self[pos] = Tile.new(nil, true)
@@ -131,8 +131,6 @@ class Board
       tile.reveal
       adjacent_squares(pos).each { |coord| fringe(coord) } #&& self[pos].bomb? == false
     end
-      # access adjacent squares
-      # call fringe on any adjacent squares that have a count of zero
   end
 
 end

@@ -31,21 +31,20 @@ class Minesweeper
   # end
 
   def make_move(pos)
+    return -1 if board[pos].bomb?
     board.fringe(pos)
   end
 
   def play
-    system('clear')
-    display
-    pos = get_move
-    make_move(pos)
+    until board.empty_squares.length == 0
+      system('clear')
+      display
+      pos = get_move
+      return "You lost" if self.bomb?
+      make_move(pos)
+    end
+    "You won!"
   end
-
-  # def run
-  #   play until over?
-  # end
-
-
 end
 
 if __FILE__ == $PROGRAM_NAME
