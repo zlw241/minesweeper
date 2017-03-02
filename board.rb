@@ -122,6 +122,19 @@ class Board
     end
   end
 
+  def fringe(pos)
+    tile = self[pos]
+    return if tile.revealed?
+    if tile.count > 0
+      tile.reveal unless tile.bomb?
+    else
+      tile.reveal
+      adjacent_squares(pos).each { |coord| fringe(coord) } #&& self[pos].bomb? == false
+    end
+      # access adjacent squares
+      # call fringe on any adjacent squares that have a count of zero
+  end
+
 end
 
 if __FILE__ == $PROGRAM_NAME

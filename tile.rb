@@ -1,14 +1,11 @@
 class Tile
-  attr_accessor :revealed
+  attr_accessor :revealed, :count
+  attr_reader :bomb
 
   def initialize(count=nil, bomb = false)
     @bomb = bomb
     @count = count
     @revealed = false
-  end
-
-  def count
-    @count = nil if bomb
   end
 
   def revealed?

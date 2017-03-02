@@ -30,16 +30,17 @@ class Minesweeper
   #   board[pos].bomb?
   # end
 
-  # def make_move(pos)
-  #   board[pos].reveal
-  # end
-  #
-  # def play
-  #   system('clear')
-  #   display
-  #   get_move
-  # end
-  #
+  def make_move(pos)
+    board.fringe(pos)
+  end
+
+  def play
+    system('clear')
+    display
+    pos = get_move
+    make_move(pos)
+  end
+
   # def run
   #   play until over?
   # end
@@ -50,5 +51,7 @@ end
 if __FILE__ == $PROGRAM_NAME
   game = Minesweeper.new(Board.new(9))
   game.display
-  game.get_move
+  move = game.get_move
+  game.make_move(move)
+  game.display
 end
