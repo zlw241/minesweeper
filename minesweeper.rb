@@ -27,7 +27,6 @@ class Minesweeper
   end
 
   def make_move(pos)
-    # return -1 if board[pos].bomb?
     return if board[pos].bomb?
     board.fringe(pos)
   end
